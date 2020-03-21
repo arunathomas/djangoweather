@@ -2,6 +2,33 @@
 
 {% block content %}
 
-<h1>Hello World!</h1>
+<br/>
+
+{% if zipcode %}
+    {{ zipcode }}
+{% endif %}
+
+
+<!-- {{ api.0.AQI }} -->
+<!-- The {{ api }} calls the context variable api's zereoth thru Django.    -->
+<!-- The ".0" calls the zeroeth item from the list, the .AQI is a key from a key-value pair returns just the value -->
+
+{% if api %}
+  {% if api == "Error..."%}
+      There was an error, please try again...
+  {% else %}
+      <div class="jumbotron {{category_color}}">
+        <h1 class="display-4">{{ api.0.Category.Name }}</h1>
+        <p class="lead">Current {{ api.0.ReportingArea}} Air Quality: {{ api.0.AQI }}</p>
+        <hr class="my-4">
+
+        <p>{{ category_description }}</p>
+
+      </div>
+
+
+  {% endif %}
+
+{% endif %}
 
 {% endblock %}

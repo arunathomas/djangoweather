@@ -9,31 +9,43 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+    <style media="screen">
+      .good {background-color: #02C39A;}
+      .moderate {background-color: #E9C46A;}
+      .unhealthy-for-sensitive-groups {background-color: #F4A261;}
+      .unhealthy {background-color: #E71D36;}
+      .very-unhealthy {background-color: #BF1F5D;}
+      .hazardous  {background-color: #88292F;}
+    </style>
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-      <a class="navbar-brand" href="{% url 'home' %}">Weather App</a>
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Weather App</a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">About</a>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+          </ul>
 
-        </ul>
+          <form action="{% url 'home' %}" class="form-inline my-2 my-lg-0" method="POST">
+              {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Enter Zipcode" aria-label="Search" name="zipcode">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lookup</button>
+          </form>
 
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
+        </div>
       </div>
     </nav>
+
     <br/>
     <div class="container">
       {% block content %}
