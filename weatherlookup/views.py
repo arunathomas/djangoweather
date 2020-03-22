@@ -10,7 +10,7 @@ def home(request):
     if request.method == "POST":
         zipcode = request.POST['zipcode']
         #following grabs the data from the airnow website using the api endpoint
-        api_request = requests.get("http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=" + zipcode + "&distance=0&API_KEY=9C489960-9EBE-4512-A44A-A5DF35322FA6")
+        api_request = requests.get("http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=" + zipcode + "&distance=0&API_KEY=")
 
         try:
             api = json.loads(api_request.content)
@@ -48,7 +48,7 @@ def home(request):
             })
     else:
             #following grabs the data from the airnow website using the api endpoint
-        api_request = requests.get("http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=10710&distance=0&API_KEY=9C489960-9EBE-4512-A44A-A5DF35322FA6")
+        api_request = requests.get("http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=10710&distance=0&API_KEY=")
 
         try:
             api = json.loads(api_request.content) # Calls JSON to parse and load up the content from inside the "api_request" variable and assign it to the "api" variable
@@ -80,10 +80,11 @@ def home(request):
             category_color = "hazardous"
 
         return render(request, 'home.html', {#this statement will pass the item in the render dictionary to the home page so that "api" context variables can be seen on the homepage
-            'api':api,
+            'api': api,
             'category_description': category_description,
             'category_color': category_color,
             })
+
 
 def about(request):
     return render(request, 'about.html', {})
